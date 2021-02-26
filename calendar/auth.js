@@ -39,7 +39,7 @@ module.exports = function (RED) {
                     let reqPayload = {
                         data: {
                             referenceId: referenceId,
-                            configNodes: ["google-session"]
+                            configNodes: ["google-session-cal"]
                         }
                     };
                     return requestChannel.request(fastmqChannel, fastmqTopic, reqPayload, 'json');
@@ -55,7 +55,7 @@ module.exports = function (RED) {
         }
     }
 
-    RED.nodes.registerType('google-session', GoogleSession, {
+    RED.nodes.registerType('google-session-cal', GoogleSession, {
         credentials: {
             access_token: {
                 type: String

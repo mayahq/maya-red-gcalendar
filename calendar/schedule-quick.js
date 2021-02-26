@@ -18,7 +18,6 @@ module.exports = function (RED) {
                     "Content-Type":"application/json"
                 }
             }).then(res => res.json()).then(json => {
-                console.log(json);
                 msg.payload = json.htmlLink;
                 node.send(msg);
             }).catch(err => {

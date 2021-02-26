@@ -32,7 +32,8 @@
   "node-red":{
     "nodes": {
       "auth": "calendar/auth.js",
-      "schedule-quick": "calendar/schedule-quick.js"
+      "schedule-quick": "calendar/schedule-quick.js",
+      "google-meet":"calendar/schedule-google-meet.js"
   }
 }
 }

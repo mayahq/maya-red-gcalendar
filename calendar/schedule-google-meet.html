@@ -1,22 +1,21 @@
 <script type="text/javascript">
-    RED.nodes.registerType('schedule-quick', {
+    RED.nodes.registerType('schedule-google-meet', {
       category: 'google-calendar',
       color: '#8BBDD9',
       defaults: {
         name: { value: ""},
         session: {value:"", type: "google-session-cal"},
-        eventText: {value:""},
       },
       inputs:1,
       outputs:1,
       label: function() {
-          return this.name || "schedule-quick";
+          return this.name || "schedule-google-meet";
       },
-      paletteLabel: "schedule-quick",
+      paletteLabel: "schedule-google-meet",
     });
 </script>
 
-<script type="text/x-red" data-template-name="schedule-quick">
+<script type="text/x-red" data-template-name="schedule-google-meet">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
@@ -27,5 +26,5 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="schedule-quick">
+<script type="text/x-red" data-help-name="schedule-google-meet">
 </script>
