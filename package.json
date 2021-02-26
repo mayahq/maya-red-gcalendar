@@ -23,11 +23,16 @@
   },
   "homepage": "https://github.com/mayahq/maya-red-gcalendar#readme",
   "dependencies": {
+    "crypto": "^1.0.1",
+    "fastmq": "^1.3.8",
     "googleapis": "^67.1.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "node-schedule": "^2.0.0"
   },
-  "nodes":{
-    "auth":"calendar/auth.js",
-    "schedule-quick":"calendar/schedule-quick.js"
+  "node-red":{
+    "nodes": {
+      "auth": "calendar/auth.js",
+      "schedule-quick": "calendar/schedule-quick.js"
   }
+}
 }

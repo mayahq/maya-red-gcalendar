@@ -1,4 +1,4 @@
-const { isNullOrUndefined } = require('util');
+// const { isNullOrUndefined } = require('util');
 
 module.exports = function (RED) {
     'use strict'
@@ -10,9 +10,9 @@ module.exports = function (RED) {
         var localUserCache = {};
         RED.nodes.createNode(this, config);
 
-        this.name = config.name === "" || isNullOrUndefined(config.name)? "Google Authorization" : config.name;
-        this.fastmqChannel = config.fastmqChannel === "" || isNullOrUndefined(config.fastmqChannel) ? "master" : config.fastmqChannel;
-        this.fastmqTopic = config.fastmqTopic === "" || isNullOrUndefined(config.fastmqTopic) ? "refresh" : config.fastmqTopic;
+        this.name = config.name;
+        this.fastmqChannel =  config.fastmqChannel;
+        this.fastmqTopic = config.fastmqTopic;
         const node = this;
         if (this.credentials.access_token && this.credentials.expiry_date) {
             this.oauth = {
