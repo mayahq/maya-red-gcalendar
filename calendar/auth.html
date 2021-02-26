@@ -1,0 +1,58 @@
+<script type="text/javascript">
+    RED.nodes.registerType('google-session', {
+      category: 'config',
+      color: '#8BBDD9',
+      defaults: {
+        name: { value: "GMail Authorization" },
+        fastmqChannel: {value: "master" },
+        fastmqTopic: {value: "refresh" }
+      },
+      credentials: {
+            access_token: { type: String},
+            expiry_date: {type: Number},
+            referenceId: {type: String}
+        },
+      icon: "fa-file-code-o.png",
+      exportable: false,
+      label: function() {
+            if (this.name) {
+                return this.name
+            } else {
+                return this.id
+            }
+        },
+      oneditsave: function() {
+        var trimFields = [
+            "access_token"
+        ];
+        // Just in case any whitespace has crept in with the copy-paste of the fields
+        trimFields.forEach(function(field) {
+            var v = $("#node-config-input-"+field).val();
+            v = v.trim();
+            $("#node-config-input-"+field).val(v);
+
+        });
+    }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="google-session">
+    <div class="form-row">
+        <label style="margin-left: 20px;" for="node-config-input-name" >Name</label>
+        <input type="text" id="node-config-input-name"></input>
+    </div>
+    <div class="form-row">
+        <label style="margin-left: 20px;" for="node-config-input-access_token">Access Token</label>
+        <input type="password" id="node-config-input-access_token">
+    </div>
+    <div class="form-row">
+        <label style="margin-left: 20px;" for="node-config-input-fastmqChannel">FastMQ Channel</label>
+        <input type="text" id="node-config-input-fastmqChannel">
+    </div>
+    <div class="form-row">
+        <label style="margin-left: 20px;" for="node-config-input-fastmqTopic">FastMQ Topic</label>
+        <input type="text" id="node-config-input-fastmqTopic">
+    </div>
+  </div>
+</script>
+</script>

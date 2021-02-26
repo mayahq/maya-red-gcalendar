@@ -1,0 +1,33 @@
+{
+  "name": "maya-red-gcalendar",
+  "version": "1.0.0",
+  "description": "Maya Red module to automate Google Calendar events from Maya",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayahq/maya-red-gcalendar.git"
+  },
+  "keywords": [
+    "google",
+    "calendar",
+    "meeting",
+    "scheduling"
+  ],
+  "author": "@shubham-root",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mayahq/maya-red-gcalendar/issues"
+  },
+  "homepage": "https://github.com/mayahq/maya-red-gcalendar#readme",
+  "dependencies": {
+    "googleapis": "^67.1.0",
+    "node-fetch": "^2.6.1"
+  },
+  "nodes":{
+    "auth":"calendar/auth.js",
+    "schedule-quick":"calendar/schedule-quick.js"
+  }
+}
