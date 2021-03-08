@@ -9,6 +9,11 @@ module.exports = function (RED) {
         }
         // Retrieve the config node
         this.on("input", async function (msg) {
+            node.status({
+                text: "scheduling..",
+                fill: "yellow",
+                shape: "dot"
+            })
             var emails = msg.attendees.split(',')||[];
             var attendees = [];
             var emailTest = /\S+@\S+\.\S+/;
@@ -55,9 +60,20 @@ module.exports = function (RED) {
                 }
             }).then(res => res.json()).then(json => {
                 msg.payload = json.htmlLink;
+                node.status({
+                    text: "scheduled",
+                    fill: "green",
+                    shape: "dot"
+                });
                 node.send(msg);
             }).catch(err => {
-                node.send(err);
+                node.status({
+                    text: err.substring(0, 15),
+                    fill: "red",
+                    shape: "dot"
+                });
+                msg.error = err;
+                node.send(msg);
             });
         });
     }

@@ -6,6 +6,11 @@ module.exports = function (RED) {
         this.credentials = RED.nodes.getCredentials(config.session);
         // Retrieve the config node
         this.on("input", async function (msg) {
+            node.status({
+                text: "scheduling..",
+                fill: "yellow",
+                shape: "dot"
+            })
             var fetch = require("node-fetch"); // or fetch() is native in browsers
             fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events/quickAdd", {
                 method: "POST",
@@ -19,9 +24,20 @@ module.exports = function (RED) {
                 }
             }).then(res => res.json()).then(json => {
                 msg.payload = json.htmlLink;
+                node.status({
+                    text: "scheduled",
+                    fill: "green",
+                    shape: "dot"
+                });
                 node.send(msg);
             }).catch(err => {
-                node.send(err);
+                node.status({
+                    text: err.substring(0, 15),
+                    fill: "red",
+                    shape: "dot"
+                });
+                msg.error = err;
+                node.send(msg);
             });
         });
     }
