@@ -23,7 +23,7 @@ module.exports = function (RED) {
                     "Content-Type":"application/json"
                 }
             }).then(res => res.json()).then(json => {
-                msg.payload = json.htmlLink;
+                msg.payload = json;
                 node.status({
                     text: "scheduled",
                     fill: "green",
