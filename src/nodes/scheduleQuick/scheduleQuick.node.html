@@ -1,0 +1,82 @@
+<script type='text/javascript'>
+    RED.nodes.registerType("schedule-quick", {
+        category: "Maya Red Gcalendar",
+        color: "#8BBDD9",
+        defaults: {
+            name: {
+                value: ""
+            },
+            session: {
+                value: "",
+                type: "auth"
+            },
+            eventText: {
+                value: ""
+            },
+            payloadTypeeventText: {
+                value: "global"
+            },
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "fa-file-code-o.png",
+        label: function() {
+            return this.name || "schedule-quick"
+        },
+        paletteLabel: "schedule-quick",
+        exportable: true,
+        oneditprepare: function() {
+
+            if (this.payloadTypeeventText === null) {
+                if (this.eventText === "") {
+                    this.payloadTypeeventText = "date"
+                } else {
+                    this.payloadTypeeventText = "str"
+                }
+            } else if (this.payloadTypeeventText === 'string' || this.payloadTypeeventText === 'none') {
+                this.payloadTypeeventText = "str"
+            }
+
+            $("#node-input-payloadTypeeventText").val(this.payloadTypeeventText)
+            $("#node-input-eventText").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypeeventText"),
+                types: ["flow", "global", "msg", "str"]
+            })
+            $("#node-input-eventText").typedInput("type", this.payloadTypeeventText)
+
+        },
+        oneditsave: function() {
+            var trimFields = []
+
+            trimFields.forEach(function(field) {
+                const selector = `node-input-${field.name}`
+                let v = $(selector).val()
+                v = v.trim()
+                $(selector).val(v)
+            })
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="schedule-quick">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+    </div>
+                        <div class="form-row">
+    <label for="node-input-session">session</label>
+    <input type="text" id="node-input-session"></input>
+</div>
+                                <div class="form-row">
+    <label for="node-input-eventText">eventText</label>
+    <input type="text" id="node-input-eventText"></input>
+            <input type="hidden" id="node-input-payloadTypeeventText">
+     
+</div>
+                
+    </script>
+
+<script type="text/x-red" data-help-name="schedule-quick">
+    <p> Enter documentation here </p>
+</script>
