@@ -1,5 +1,5 @@
 <script type='text/javascript'>
-    RED.nodes.registerType("schedule-quick", {
+    RED.nodes.registerType("list-events", {
         category: "Maya Red Gcalendar",
         color: "#8BBDD9",
         defaults: {
@@ -9,12 +9,6 @@
             session: {
                 value: "",
                 type: "gcalendar-auth"
-            },
-            eventText: {
-                value: ""
-            },
-            payloadTypeeventText: {
-                value: "global"
             },
             calendarId: {
                 value: ""
@@ -27,30 +21,11 @@
         outputs: 1,
         icon: "fa-file-code-o.png",
         label: function() {
-            return this.name || "schedule-quick"
+            return this.name || "list-events"
         },
-        paletteLabel: "schedule-quick",
+        paletteLabel: "list-events",
         exportable: true,
         oneditprepare: function() {
-
-            if (this.payloadTypeeventText === null) {
-                if (this.eventText === "") {
-                    this.payloadTypeeventText = "date"
-                } else {
-                    this.payloadTypeeventText = "str"
-                }
-            } else if (this.payloadTypeeventText === 'string' || this.payloadTypeeventText === 'none') {
-                this.payloadTypeeventText = "str"
-            }
-
-            $("#node-input-payloadTypeeventText").val(this.payloadTypeeventText)
-            $("#node-input-eventText").typedInput({
-                default: "str",
-                typeField: $("#node-input-payloadTypeeventText"),
-                types: ["flow", "global", "msg", "str"]
-            })
-            $("#node-input-eventText").typedInput("type", this.payloadTypeeventText)
-
 
             if (this.payloadTypecalendarId === null) {
                 if (this.calendarId === "") {
@@ -84,7 +59,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="schedule-quick">
+<script type="text/x-red" data-template-name="list-events">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
@@ -92,12 +67,6 @@
                         <div class="form-row">
     <label for="node-input-session">session</label>
     <input type="text" id="node-input-session"></input>
-</div>
-                                <div class="form-row">
-    <label for="node-input-eventText">eventText</label>
-    <input type="text" id="node-input-eventText"></input>
-            <input type="hidden" id="node-input-payloadTypeeventText">
-     
 </div>
                                 <div class="form-row">
     <label for="node-input-calendarId">calendarId</label>
@@ -108,6 +77,6 @@
                 
     </script>
 
-<script type="text/x-red" data-help-name="schedule-quick">
+<script type="text/x-red" data-help-name="list-events">
     <p> Enter documentation here </p>
 </script>

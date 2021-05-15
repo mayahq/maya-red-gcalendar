@@ -6,13 +6,14 @@ const FastMQ = require('fastmq');
 const nodeSchedule = require("node-schedule");
 const crypto = require('crypto');
 
-class Auth extends Node {
+class GcalendarAuth extends Node {
     static schema = new Schema({
-        name: 'auth',
-        label: 'auth',
+        name: 'gcalendar-auth',
+        label: 'gcalendar-auth',
         category: 'config',
         isConfig: true,
         fields: {
+            // Whatever custom fields the node needs.
             fastmqChannel: {value: "master" },
             fastmqTopic: {value: "refresh" },
         },
@@ -34,8 +35,6 @@ class Auth extends Node {
 
     onInit() {
         // Do something on initialization of node
-        // the config information needs a runtime API to be set as creds
-        console.log("init function for auth node", this);
         var localUserCache = {};
         if (this.credentials.access_token && this.credentials.expiry_date) {
             this.credHash = crypto.createHash('sha1').update(this.credentials.access_token).digest('base64');
@@ -77,7 +76,8 @@ class Auth extends Node {
     async onMessage(msg, vals) {
         // Handle the message. The returned value will
         // be sent as the message to any further nodes.
+
     }
 }
 
-module.exports = Auth
+module.exports = GcalendarAuth

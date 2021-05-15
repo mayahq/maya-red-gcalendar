@@ -1,5 +1,5 @@
 <script type='text/javascript'>
-    RED.nodes.registerType("auth", {
+    RED.nodes.registerType("gcalendar-auth", {
         category: "config",
         color: "#8BBDD9",
         defaults: {
@@ -10,10 +10,10 @@
         credentials: {
             access_token: {
                 type: String
-            },
+            }
             expiry_date: {
                 type: Number
-            },
+            }
             referenceId: {
                 type: String
             }
@@ -22,9 +22,9 @@
         outputs: 1,
         icon: "fa-file-code-o.png",
         label: function() {
-            return this.name || "auth"
+            return this.name || "gcalendar-auth"
         },
-        paletteLabel: "auth",
+        paletteLabel: "gcalendar-auth",
         exportable: true,
         oneditprepare: function() {},
         oneditsave: function() {
@@ -40,7 +40,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="auth">
+<script type="text/x-red" data-template-name="gcalendar-auth">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
@@ -67,6 +67,6 @@
          
     </script>
 
-<script type="text/x-red" data-help-name="auth">
+<script type="text/x-red" data-help-name="gcalendar-auth">
     <p> Enter documentation here </p>
 </script>

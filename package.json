@@ -25,8 +25,10 @@
   "nodeRedModuleName": "maya-red-gcalendar",
   "node-red": {
     "nodes": {
-      "auth": "src/nodes/auth/auth.node.js",
-      "schedule-quick": "src/nodes/scheduleQuick/scheduleQuick.node.js"
+      "schedule-quick": "src/nodes/scheduleQuick/scheduleQuick.node.js",
+      "gcalendar-auth": "src/nodes/gcalendarAuth/gcalendarAuth.node.js",
+      "list-events": "src/nodes/listEvents/listEvents.node.js",
+      "delete-event": "src/nodes/deleteEvent/deleteEvent.node.js"
     }
   }
 }

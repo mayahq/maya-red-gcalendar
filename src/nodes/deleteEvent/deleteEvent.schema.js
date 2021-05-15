@@ -4,15 +4,15 @@ const {
 } = require('@mayahq/module-sdk');
 const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema")
 
-class ScheduleQuick extends Node {
+class DeleteEvent extends Node {
     static schema = new Schema({
-        name: 'schedule-quick',
-        label: 'schedule-quick',
+        name: 'delete-event',
+        label: 'delete-event',
         category: 'Maya Red Gcalendar',
         isConfig: false,
         fields: {
             session: GcalendarAuth,
-            eventText: {
+            eventId: {
                 type: String,
                 defaultValue: ''
             },
@@ -31,14 +31,10 @@ class ScheduleQuick extends Node {
     async onMessage(msg, vals) {
         // Handle the message. The returned value will
         // be sent as the message to any further nodes.
-        this.setStatus("PROGRESS", "scheduling...");
+        this.setStatus("PROGRESS", "deleting event...");
         var fetch = require("node-fetch"); // or fetch() is native in browsers
-        fetch(`https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/quickAdd`, {
-            method: "POST",
-            body:JSON.stringify({
-                text: vals.eventText,
-                sendUpdates: "all"
-            }),
+        fetch(`https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/${vals.eventId}`, {
+            method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${this.credentials.session.access_token}`,
                 "Content-Type":"application/json"
@@ -53,7 +49,7 @@ class ScheduleQuick extends Node {
             }
             console.log(json)
             msg.payload = json;
-            this.setStatus("SUCCESS", "scheduled");
+            this.setStatus("SUCCESS", "deleted");
             return msg;
         })
         .catch(err => {
@@ -65,4 +61,4 @@ class ScheduleQuick extends Node {
     }
 }
 
-module.exports = ScheduleQuick
+module.exports = DeleteEvent

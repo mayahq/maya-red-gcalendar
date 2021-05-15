@@ -1,5 +1,5 @@
 <script type='text/javascript'>
-    RED.nodes.registerType("schedule-quick", {
+    RED.nodes.registerType("delete-event", {
         category: "Maya Red Gcalendar",
         color: "#8BBDD9",
         defaults: {
@@ -10,10 +10,10 @@
                 value: "",
                 type: "gcalendar-auth"
             },
-            eventText: {
+            eventId: {
                 value: ""
             },
-            payloadTypeeventText: {
+            payloadTypeeventId: {
                 value: "global"
             },
             calendarId: {
@@ -27,29 +27,29 @@
         outputs: 1,
         icon: "fa-file-code-o.png",
         label: function() {
-            return this.name || "schedule-quick"
+            return this.name || "delete-event"
         },
-        paletteLabel: "schedule-quick",
+        paletteLabel: "delete-event",
         exportable: true,
         oneditprepare: function() {
 
-            if (this.payloadTypeeventText === null) {
-                if (this.eventText === "") {
-                    this.payloadTypeeventText = "date"
+            if (this.payloadTypeeventId === null) {
+                if (this.eventId === "") {
+                    this.payloadTypeeventId = "date"
                 } else {
-                    this.payloadTypeeventText = "str"
+                    this.payloadTypeeventId = "str"
                 }
-            } else if (this.payloadTypeeventText === 'string' || this.payloadTypeeventText === 'none') {
-                this.payloadTypeeventText = "str"
+            } else if (this.payloadTypeeventId === 'string' || this.payloadTypeeventId === 'none') {
+                this.payloadTypeeventId = "str"
             }
 
-            $("#node-input-payloadTypeeventText").val(this.payloadTypeeventText)
-            $("#node-input-eventText").typedInput({
+            $("#node-input-payloadTypeeventId").val(this.payloadTypeeventId)
+            $("#node-input-eventId").typedInput({
                 default: "str",
-                typeField: $("#node-input-payloadTypeeventText"),
+                typeField: $("#node-input-payloadTypeeventId"),
                 types: ["flow", "global", "msg", "str"]
             })
-            $("#node-input-eventText").typedInput("type", this.payloadTypeeventText)
+            $("#node-input-eventId").typedInput("type", this.payloadTypeeventId)
 
 
             if (this.payloadTypecalendarId === null) {
@@ -84,7 +84,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="schedule-quick">
+<script type="text/x-red" data-template-name="delete-event">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
@@ -94,9 +94,9 @@
     <input type="text" id="node-input-session"></input>
 </div>
                                 <div class="form-row">
-    <label for="node-input-eventText">eventText</label>
-    <input type="text" id="node-input-eventText"></input>
-            <input type="hidden" id="node-input-payloadTypeeventText">
+    <label for="node-input-eventId">eventId</label>
+    <input type="text" id="node-input-eventId"></input>
+            <input type="hidden" id="node-input-payloadTypeeventId">
      
 </div>
                                 <div class="form-row">
@@ -108,6 +108,6 @@
                 
     </script>
 
-<script type="text/x-red" data-help-name="schedule-quick">
+<script type="text/x-red" data-help-name="delete-event">
     <p> Enter documentation here </p>
 </script>
