@@ -16,6 +16,24 @@
             payloadTypecalendarId: {
                 value: "global"
             },
+            timeMin: {
+                value: ""
+            },
+            payloadTypetimeMin: {
+                value: "global"
+            },
+            timeMax: {
+                value: ""
+            },
+            payloadTypetimeMax: {
+                value: "global"
+            },
+            singleEvents: {
+                value: ""
+            },
+            payloadTypesingleEvents: {
+                value: "global"
+            },
         },
         inputs: 1,
         outputs: 1,
@@ -45,6 +63,63 @@
             })
             $("#node-input-calendarId").typedInput("type", this.payloadTypecalendarId)
 
+
+            if (this.payloadTypetimeMin === null) {
+                if (this.timeMin === "") {
+                    this.payloadTypetimeMin = "date"
+                } else {
+                    this.payloadTypetimeMin = "str"
+                }
+            } else if (this.payloadTypetimeMin === 'string' || this.payloadTypetimeMin === 'none') {
+                this.payloadTypetimeMin = "str"
+            }
+
+            $("#node-input-payloadTypetimeMin").val(this.payloadTypetimeMin)
+            $("#node-input-timeMin").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypetimeMin"),
+                types: ["flow", "global", "msg", "str"]
+            })
+            $("#node-input-timeMin").typedInput("type", this.payloadTypetimeMin)
+
+
+            if (this.payloadTypetimeMax === null) {
+                if (this.timeMax === "") {
+                    this.payloadTypetimeMax = "date"
+                } else {
+                    this.payloadTypetimeMax = "str"
+                }
+            } else if (this.payloadTypetimeMax === 'string' || this.payloadTypetimeMax === 'none') {
+                this.payloadTypetimeMax = "str"
+            }
+
+            $("#node-input-payloadTypetimeMax").val(this.payloadTypetimeMax)
+            $("#node-input-timeMax").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypetimeMax"),
+                types: ["flow", "global", "msg", "str"]
+            })
+            $("#node-input-timeMax").typedInput("type", this.payloadTypetimeMax)
+
+
+            if (this.payloadTypesingleEvents === null) {
+                if (this.singleEvents === "") {
+                    this.payloadTypesingleEvents = "date"
+                } else {
+                    this.payloadTypesingleEvents = "str"
+                }
+            } else if (this.payloadTypesingleEvents === 'string' || this.payloadTypesingleEvents === 'none') {
+                this.payloadTypesingleEvents = "str"
+            }
+
+            $("#node-input-payloadTypesingleEvents").val(this.payloadTypesingleEvents)
+            $("#node-input-singleEvents").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypesingleEvents"),
+                types: ["flow", "global", "msg", "str"]
+            })
+            $("#node-input-singleEvents").typedInput("type", this.payloadTypesingleEvents)
+
         },
         oneditsave: function() {
             var trimFields = []
@@ -72,6 +147,24 @@
     <label for="node-input-calendarId">calendarId</label>
     <input type="text" id="node-input-calendarId"></input>
             <input type="hidden" id="node-input-payloadTypecalendarId">
+     
+</div>
+                                <div class="form-row">
+    <label for="node-input-timeMin">timeMin</label>
+    <input type="text" id="node-input-timeMin"></input>
+            <input type="hidden" id="node-input-payloadTypetimeMin">
+     
+</div>
+                                <div class="form-row">
+    <label for="node-input-timeMax">timeMax</label>
+    <input type="text" id="node-input-timeMax"></input>
+            <input type="hidden" id="node-input-payloadTypetimeMax">
+     
+</div>
+                                <div class="form-row">
+    <label for="node-input-singleEvents">singleEvents</label>
+    <input type="text" id="node-input-singleEvents"></input>
+            <input type="hidden" id="node-input-payloadTypesingleEvents">
      
 </div>
                 

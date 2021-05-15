@@ -16,6 +16,7 @@ class GcalendarAuth extends Node {
             // Whatever custom fields the node needs.
             fastmqChannel: {value: "master" },
             fastmqTopic: {value: "refresh" },
+            name: {value: this.name}
         },
         redOpts: {
             credentials: {
