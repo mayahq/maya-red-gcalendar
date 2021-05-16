@@ -14,11 +14,11 @@ class DeleteEvent extends Node {
             session: GcalendarAuth,
             eventId: {
                 type: String,
-                defaultValue: ''
+                defaultVal: ''
             },
             calendarId: {
                 type: String,
-                defaultValue: 'primary'
+                defaultVal: 'primary'
             }
         },
 

@@ -14,21 +14,21 @@ class ListEvents extends Node {
             session: GcalendarAuth,
             calendarId: {
                 type: String,
-                defaultValue: 'primary'
+                defaultVal: 'primary'
             },
             timeMin: {
                 type: String,
                 // current timestamp
-                defaultValue: (new Date()).toISOString()
+                defaultVal: (new Date()).toISOString()
             },
             timeMax: {
                 type: String,
                 // end of today
-                defaultValue: (new Date(new Date().getFullYear(), new Date().getMonth(), 23, 59, 59)).toISOString()
+                defaultVal: (new Date(new Date().getFullYear(), new Date().getMonth(), 23, 59, 59)).toISOString()
             },
             singleEvents: {
                 type: String,
-                defaultValue: "true"
+                defaultVal: "true"
             }
         },
 

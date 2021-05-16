@@ -14,11 +14,11 @@ class ScheduleQuick extends Node {
             session: GcalendarAuth,
             eventText: {
                 type: String,
-                defaultValue: ''
+                defaultVal: ''
             },
             calendarId: {
                 type: String,
-                defaultValue: 'primary'
+                defaultVal: 'primary'
             }
         },
 
