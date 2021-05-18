@@ -1,6 +1,7 @@
 const {
     Node,
-    Schema
+    Schema,
+    fields
 } = require('@mayahq/module-sdk');
 const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
 
@@ -11,25 +12,18 @@ class ListEvents extends Node {
         category: 'Maya Red Gcalendar',
         isConfig: false,
         fields: {
-            session: GcalendarAuth,
-            calendarId: {
-                type: String,
-                defaultVal: 'primary'
-            },
-            timeMin: {
-                type: String,
-                // current timestamp
-                defaultVal: (new Date()).toISOString()
-            },
-            timeMax: {
-                type: String,
-                // end of today
-                defaultVal: (new Date(new Date().getFullYear(), new Date().getMonth(), 23, 59, 59)).toISOString()
-            },
-            singleEvents: {
-                type: String,
-                defaultVal: "true"
-            }
+            session: new fields.ConfigNode({type: GcalendarAuth}),
+            calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
+            timeMin: new fields.Typed({
+                type: 'str', 
+                defaultVal: (new Date()).toISOString(), 
+                allowedTypes: ['msg', 'flow', 'global']
+            }),
+            timeMax: new fields.Typed({
+                type: 'str', 
+                defaultVal: (new Date(new Date().getFullYear(), new Date().getMonth(), 23, 59, 59)).toISOString(), 
+                allowedTypes: ['msg', 'flow', 'global']}),
+            singleEvents: new fields.Typed({type: 'bool', defaultVal: true, allowedTypes: ['msg', 'flow', 'global']}),
         },
 
     })

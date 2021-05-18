@@ -6,6 +6,9 @@
             name: {
                 value: ""
             },
+            isProfileConfigNode: {
+                value: false
+            },
             session: {
                 value: "",
                 type: "gcalendar-auth"
@@ -14,13 +17,13 @@
                 value: ""
             },
             payloadTypeeventId: {
-                value: "global"
+                value: "str"
             },
             calendarId: {
                 value: "primary"
             },
             payloadTypecalendarId: {
-                value: "global"
+                value: "str"
             },
         },
         inputs: 1,
@@ -32,7 +35,6 @@
         paletteLabel: "delete-event",
         exportable: true,
         oneditprepare: function() {
-
             if (this.payloadTypeeventId === null) {
                 if (this.eventId === "") {
                     this.payloadTypeeventId = "date"
@@ -47,10 +49,9 @@
             $("#node-input-eventId").typedInput({
                 default: "str",
                 typeField: $("#node-input-payloadTypeeventId"),
-                types: ["flow", "global", "msg", "str"]
+                types: ["msg", "flow", "global", "str"]
             })
             $("#node-input-eventId").typedInput("type", this.payloadTypeeventId)
-
 
             if (this.payloadTypecalendarId === null) {
                 if (this.calendarId === "") {
@@ -66,47 +67,40 @@
             $("#node-input-calendarId").typedInput({
                 default: "str",
                 typeField: $("#node-input-payloadTypecalendarId"),
-                types: ["flow", "global", "msg", "str"]
+                types: ["msg", "flow", "global", "str"]
             })
             $("#node-input-calendarId").typedInput("type", this.payloadTypecalendarId)
 
         },
-        oneditsave: function() {
-            var trimFields = []
-
-            trimFields.forEach(function(field) {
-                const selector = `node-input-${field.name}`
-                let v = $(selector).val()
-                v = v.trim()
-                $(selector).val(v)
-            })
-        }
+        oneditsave: function() {},
+        oneditcancel: function() {},
+        oneditdelete: function() {},
+        oneditresize: function() {},
+        onpaletteadd: function() {},
+        onpaletteremove: function() {}
     });
 </script>
 
-<script type="text/x-red" data-template-name="delete-event">
+<script type="text/html" data-template-name="delete-event">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
     </div>
-                        <div class="form-row">
-    <label for="node-input-session">session</label>
-    <input type="text" id="node-input-session"></input>
-</div>
-                                <div class="form-row">
-    <label for="node-input-eventId">eventId</label>
-    <input type="text" id="node-input-eventId"></input>
-            <input type="hidden" id="node-input-payloadTypeeventId">
-     
-</div>
-                                <div class="form-row">
-    <label for="node-input-calendarId">calendarId</label>
-    <input type="text" id="node-input-calendarId"></input>
-            <input type="hidden" id="node-input-payloadTypecalendarId">
-     
-</div>
-                
-    </script>
+    <div class="form-row">
+        <label for="node-input-session">session</label>
+        <input type="text" id="node-input-session"></input>
+    </div>
+    <div class="form-row">
+        <label for="node-input-eventId">eventId</label>
+        <input type="text" id="node-input-eventId"></input>
+        <input type="hidden" id="node-input-payloadTypeeventId">
+    </div>
+    <div class="form-row">
+        <label for="node-input-calendarId">calendarId</label>
+        <input type="text" id="node-input-calendarId"></input>
+        <input type="hidden" id="node-input-payloadTypecalendarId">
+    </div>
+</script>
 
 <script type="text/x-red" data-help-name="delete-event">
     <p> Enter documentation here </p>

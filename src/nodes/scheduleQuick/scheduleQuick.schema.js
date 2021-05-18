@@ -1,6 +1,7 @@
 const {
     Node,
-    Schema
+    Schema,
+    fields
 } = require('@mayahq/module-sdk');
 const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
 
@@ -11,15 +12,9 @@ class ScheduleQuick extends Node {
         category: 'Maya Red Gcalendar',
         isConfig: false,
         fields: {
-            session: GcalendarAuth,
-            eventText: {
-                type: String,
-                defaultVal: ''
-            },
-            calendarId: {
-                type: String,
-                defaultVal: 'primary'
-            }
+            session: new fields.ConfigNode({type: GcalendarAuth}),
+            eventText: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
+            calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
         },
 
     })

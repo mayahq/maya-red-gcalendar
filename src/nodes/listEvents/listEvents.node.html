@@ -6,6 +6,9 @@
             name: {
                 value: ""
             },
+            isProfileConfigNode: {
+                value: false
+            },
             session: {
                 value: "",
                 type: "gcalendar-auth"
@@ -14,25 +17,25 @@
                 value: "primary"
             },
             payloadTypecalendarId: {
-                value: "global"
+                value: "str"
             },
             timeMin: {
-                value: "2021-05-16T11:26:01.535Z"
+                value: "2021-05-18T09:02:14.857Z"
             },
             payloadTypetimeMin: {
-                value: "global"
+                value: "str"
             },
             timeMax: {
                 value: "2021-05-25T06:29:00.000Z"
             },
             payloadTypetimeMax: {
-                value: "global"
+                value: "str"
             },
             singleEvents: {
                 value: "true"
             },
             payloadTypesingleEvents: {
-                value: "global"
+                value: "bool"
             },
         },
         inputs: 1,
@@ -44,7 +47,6 @@
         paletteLabel: "list-events",
         exportable: true,
         oneditprepare: function() {
-
             if (this.payloadTypecalendarId === null) {
                 if (this.calendarId === "") {
                     this.payloadTypecalendarId = "date"
@@ -59,10 +61,9 @@
             $("#node-input-calendarId").typedInput({
                 default: "str",
                 typeField: $("#node-input-payloadTypecalendarId"),
-                types: ["flow", "global", "msg", "str"]
+                types: ["msg", "flow", "global", "str"]
             })
             $("#node-input-calendarId").typedInput("type", this.payloadTypecalendarId)
-
 
             if (this.payloadTypetimeMin === null) {
                 if (this.timeMin === "") {
@@ -78,10 +79,9 @@
             $("#node-input-timeMin").typedInput({
                 default: "str",
                 typeField: $("#node-input-payloadTypetimeMin"),
-                types: ["flow", "global", "msg", "str"]
+                types: ["msg", "flow", "global", "str"]
             })
             $("#node-input-timeMin").typedInput("type", this.payloadTypetimeMin)
-
 
             if (this.payloadTypetimeMax === null) {
                 if (this.timeMax === "") {
@@ -97,78 +97,68 @@
             $("#node-input-timeMax").typedInput({
                 default: "str",
                 typeField: $("#node-input-payloadTypetimeMax"),
-                types: ["flow", "global", "msg", "str"]
+                types: ["msg", "flow", "global", "str"]
             })
             $("#node-input-timeMax").typedInput("type", this.payloadTypetimeMax)
-
 
             if (this.payloadTypesingleEvents === null) {
                 if (this.singleEvents === "") {
                     this.payloadTypesingleEvents = "date"
                 } else {
-                    this.payloadTypesingleEvents = "str"
+                    this.payloadTypesingleEvents = "bool"
                 }
             } else if (this.payloadTypesingleEvents === 'string' || this.payloadTypesingleEvents === 'none') {
-                this.payloadTypesingleEvents = "str"
+                this.payloadTypesingleEvents = "bool"
             }
 
             $("#node-input-payloadTypesingleEvents").val(this.payloadTypesingleEvents)
             $("#node-input-singleEvents").typedInput({
-                default: "str",
+                default: "bool",
                 typeField: $("#node-input-payloadTypesingleEvents"),
-                types: ["flow", "global", "msg", "str"]
+                types: ["msg", "flow", "global", "bool"]
             })
             $("#node-input-singleEvents").typedInput("type", this.payloadTypesingleEvents)
 
         },
-        oneditsave: function() {
-            var trimFields = []
-
-            trimFields.forEach(function(field) {
-                const selector = `node-input-${field.name}`
-                let v = $(selector).val()
-                v = v.trim()
-                $(selector).val(v)
-            })
-        }
+        oneditsave: function() {},
+        oneditcancel: function() {},
+        oneditdelete: function() {},
+        oneditresize: function() {},
+        onpaletteadd: function() {},
+        onpaletteremove: function() {}
     });
 </script>
 
-<script type="text/x-red" data-template-name="list-events">
+<script type="text/html" data-template-name="list-events">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
     </div>
-                        <div class="form-row">
-    <label for="node-input-session">session</label>
-    <input type="text" id="node-input-session"></input>
-</div>
-                                <div class="form-row">
-    <label for="node-input-calendarId">calendarId</label>
-    <input type="text" id="node-input-calendarId"></input>
-            <input type="hidden" id="node-input-payloadTypecalendarId">
-     
-</div>
-                                <div class="form-row">
-    <label for="node-input-timeMin">timeMin</label>
-    <input type="text" id="node-input-timeMin"></input>
-            <input type="hidden" id="node-input-payloadTypetimeMin">
-     
-</div>
-                                <div class="form-row">
-    <label for="node-input-timeMax">timeMax</label>
-    <input type="text" id="node-input-timeMax"></input>
-            <input type="hidden" id="node-input-payloadTypetimeMax">
-     
-</div>
-                                <div class="form-row">
-    <label for="node-input-singleEvents">singleEvents</label>
-    <input type="text" id="node-input-singleEvents"></input>
-            <input type="hidden" id="node-input-payloadTypesingleEvents">
-     
-</div>
-                
-    </script>
+    <div class="form-row">
+        <label for="node-input-session">session</label>
+        <input type="text" id="node-input-session"></input>
+    </div>
+    <div class="form-row">
+        <label for="node-input-calendarId">calendarId</label>
+        <input type="text" id="node-input-calendarId"></input>
+        <input type="hidden" id="node-input-payloadTypecalendarId">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeMin">timeMin</label>
+        <input type="text" id="node-input-timeMin"></input>
+        <input type="hidden" id="node-input-payloadTypetimeMin">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeMax">timeMax</label>
+        <input type="text" id="node-input-timeMax"></input>
+        <input type="hidden" id="node-input-payloadTypetimeMax">
+    </div>
+    <div class="form-row">
+        <label for="node-input-singleEvents">singleEvents</label>
+        <input type="text" id="node-input-singleEvents"></input>
+        <input type="hidden" id="node-input-payloadTypesingleEvents">
+    </div>
+</script>
 
 <script type="text/x-red" data-help-name="list-events">
     <p> Enter documentation here </p>
