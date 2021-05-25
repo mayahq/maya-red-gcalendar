@@ -28,6 +28,10 @@ class ListEvents extends Node {
 
     })
 
+    constructor(node, RED) {
+        super(node, RED)
+    }
+
     onInit() {
         // Do something on initialization of node
     }
@@ -58,7 +62,7 @@ class ListEvents extends Node {
         }
         catch(err){
             msg.error = err;
-            this.setStatus("ERROR", err.substring(0, 15));
+            this.setStatus("ERROR", "error occurred");
             return msg;
         }
     }

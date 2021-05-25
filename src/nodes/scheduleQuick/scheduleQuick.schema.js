@@ -19,6 +19,10 @@ class ScheduleQuick extends Node {
 
     })
 
+    constructor(node, RED) {
+        super(node, RED)
+    }
+
     onInit() {
         // Do something on initialization of node
     }

@@ -1,5 +1,6 @@
-const DeleteEvent = require('./deleteEvent.schema')
+const NodeClass = require('./deleteEvent.schema')
+const {
+    nodefn
+} = require('@mayahq/module-sdk')
 
-const node = new DeleteEvent()
-const fn = (RED) => node.config(RED)
-module.exports = fn
+module.exports = nodefn(NodeClass)

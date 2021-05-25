@@ -1,5 +1,6 @@
-const ListEvents = require('./listEvents.schema')
+const NodeClass = require('./listEvents.schema')
+const {
+    nodefn
+} = require('@mayahq/module-sdk')
 
-const node = new ListEvents()
-const fn = (RED) => node.config(RED)
-module.exports = fn
+module.exports = nodefn(NodeClass)

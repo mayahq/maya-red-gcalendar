@@ -1,5 +1,6 @@
-const GcalendarAuth = require('./gcalendarAuth.schema')
+const NodeClass = require('./gcalendarAuth.schema')
+const {
+    nodefn
+} = require('@mayahq/module-sdk')
 
-const node = new GcalendarAuth()
-const fn = (RED) => node.config(RED)
-module.exports = fn
+module.exports = nodefn(NodeClass)

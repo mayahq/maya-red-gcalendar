@@ -1,5 +1,6 @@
-const ScheduleQuick = require('./scheduleQuick.schema')
+const NodeClass = require('./scheduleQuick.schema')
+const {
+    nodefn
+} = require('@mayahq/module-sdk')
 
-const node = new ScheduleQuick()
-const fn = (RED) => node.config(RED)
-module.exports = fn
+module.exports = nodefn(NodeClass)

@@ -23,6 +23,10 @@ class DeleteEvent extends Node {
         // Do something on initialization of node
     }
 
+    constructor(node, RED) {
+        super(node, RED)
+    }
+
     async onMessage(msg, vals) {
         // Handle the message. The returned value will
         // be sent as the message to any further nodes.
