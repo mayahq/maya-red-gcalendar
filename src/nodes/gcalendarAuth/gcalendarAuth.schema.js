@@ -44,7 +44,7 @@ class GcalendarAuth extends Node {
                 let reqPayload = {
                     data: {
                         referenceId: referenceId,
-                        configNodes: ['gdrive-auth']
+                        configNodes: ['gcalendar-auth']
                     }
                 };
                 return requestChannel.request(fastmqChannel, fastmqTopic, reqPayload, 'json');
