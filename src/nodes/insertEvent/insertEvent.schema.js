@@ -32,7 +32,7 @@ class InsertEvent extends Node {
             }),
             endDateTime: new fields.Typed({
                 type: 'str', 
-                defaultVal: (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getHours()+1, new Date().getMinutes())).toISOString(), 
+                defaultVal: (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours()+1, new Date().getMinutes())).toISOString(), 
                 allowedTypes: ['msg', 'flow', 'global']
             }),
             endTimeZone: new fields.Typed({
