@@ -1,0 +1,247 @@
+<script type='text/javascript'>
+    RED.nodes.registerType("insert-event", {
+        category: "Maya Red Gcalendar",
+        color: "#8BBDD9",
+        defaults: {
+            name: {
+                value: ""
+            },
+            isProfileConfigNode: {
+                value: false
+            },
+            session: {
+                value: "",
+                type: "gcalendar-auth"
+            },
+            summary: {
+                value: ""
+            },
+            payloadTypesummary: {
+                value: "str"
+            },
+            calendarId: {
+                value: "primary"
+            },
+            payloadTypecalendarId: {
+                value: "str"
+            },
+            startDateTime: {
+                value: "2021-06-05T16:24:46.419Z"
+            },
+            payloadTypestartDateTime: {
+                value: "str"
+            },
+            startTimeZone: {
+                value: "Asia/Kolkata"
+            },
+            payloadTypestartTimeZone: {
+                value: "str"
+            },
+            endDateTime: {
+                value: "2021-06-24T00:30:00.000Z"
+            },
+            payloadTypeendDateTime: {
+                value: "str"
+            },
+            endTimeZone: {
+                value: "Asia/Kolkata"
+            },
+            payloadTypeendTimeZone: {
+                value: "str"
+            },
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "fa-file-code-o.png",
+        label: function() {
+            return this.name || "insert-event"
+        },
+        paletteLabel: "insert-event",
+        exportable: true,
+        oneditprepare: function() {
+            if (this.payloadTypesummary === null) {
+                if (this.summary === "") {
+                    this.payloadTypesummary = "date"
+                } else {
+                    this.payloadTypesummary = "str"
+                }
+            } else if (this.payloadTypesummary === 'string' || this.payloadTypesummary === 'none') {
+                this.payloadTypesummary = "str"
+            }
+
+            $("#node-input-payloadTypesummary").val(this.payloadTypesummary)
+            $("#node-input-summary").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypesummary"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-summary").typedInput("type", this.payloadTypesummary)
+
+            if (this.payloadTypecalendarId === null) {
+                if (this.calendarId === "") {
+                    this.payloadTypecalendarId = "date"
+                } else {
+                    this.payloadTypecalendarId = "str"
+                }
+            } else if (this.payloadTypecalendarId === 'string' || this.payloadTypecalendarId === 'none') {
+                this.payloadTypecalendarId = "str"
+            }
+
+            $("#node-input-payloadTypecalendarId").val(this.payloadTypecalendarId)
+            $("#node-input-calendarId").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypecalendarId"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-calendarId").typedInput("type", this.payloadTypecalendarId)
+
+            if (this.payloadTypestartDateTime === null) {
+                if (this.startDateTime === "") {
+                    this.payloadTypestartDateTime = "date"
+                } else {
+                    this.payloadTypestartDateTime = "str"
+                }
+            } else if (this.payloadTypestartDateTime === 'string' || this.payloadTypestartDateTime === 'none') {
+                this.payloadTypestartDateTime = "str"
+            }
+
+            $("#node-input-payloadTypestartDateTime").val(this.payloadTypestartDateTime)
+            $("#node-input-startDateTime").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypestartDateTime"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-startDateTime").typedInput("type", this.payloadTypestartDateTime)
+
+            if (this.payloadTypestartTimeZone === null) {
+                if (this.startTimeZone === "") {
+                    this.payloadTypestartTimeZone = "date"
+                } else {
+                    this.payloadTypestartTimeZone = "str"
+                }
+            } else if (this.payloadTypestartTimeZone === 'string' || this.payloadTypestartTimeZone === 'none') {
+                this.payloadTypestartTimeZone = "str"
+            }
+
+            $("#node-input-payloadTypestartTimeZone").val(this.payloadTypestartTimeZone)
+            $("#node-input-startTimeZone").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypestartTimeZone"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-startTimeZone").typedInput("type", this.payloadTypestartTimeZone)
+
+            if (this.payloadTypeendDateTime === null) {
+                if (this.endDateTime === "") {
+                    this.payloadTypeendDateTime = "date"
+                } else {
+                    this.payloadTypeendDateTime = "str"
+                }
+            } else if (this.payloadTypeendDateTime === 'string' || this.payloadTypeendDateTime === 'none') {
+                this.payloadTypeendDateTime = "str"
+            }
+
+            $("#node-input-payloadTypeendDateTime").val(this.payloadTypeendDateTime)
+            $("#node-input-endDateTime").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypeendDateTime"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-endDateTime").typedInput("type", this.payloadTypeendDateTime)
+
+            if (this.payloadTypeendTimeZone === null) {
+                if (this.endTimeZone === "") {
+                    this.payloadTypeendTimeZone = "date"
+                } else {
+                    this.payloadTypeendTimeZone = "str"
+                }
+            } else if (this.payloadTypeendTimeZone === 'string' || this.payloadTypeendTimeZone === 'none') {
+                this.payloadTypeendTimeZone = "str"
+            }
+
+            $("#node-input-payloadTypeendTimeZone").val(this.payloadTypeendTimeZone)
+            $("#node-input-endTimeZone").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypeendTimeZone"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-endTimeZone").typedInput("type", this.payloadTypeendTimeZone)
+
+        },
+        oneditsave: function() {},
+        oneditcancel: function() {},
+        oneditdelete: function() {},
+        oneditresize: function() {},
+        onpaletteadd: function() {},
+        onpaletteremove: function() {}
+    });
+</script>
+
+<script type="text/html" data-template-name="insert-event">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-session">session</label>
+        <input type="text" id="node-input-session"></input>
+    </div>
+    <div class="form-row">
+        <label for="node-input-summary">summary</label>
+        <input type="text" id="node-input-summary"></input>
+        <input type="hidden" id="node-input-payloadTypesummary">
+    </div>
+    <div class="form-row">
+        <label for="node-input-calendarId">calendarId</label>
+        <input type="text" id="node-input-calendarId"></input>
+        <input type="hidden" id="node-input-payloadTypecalendarId">
+    </div>
+    <div class="form-row">
+        <label for="node-input-startDateTime">startDateTime</label>
+        <input type="text" id="node-input-startDateTime"></input>
+        <input type="hidden" id="node-input-payloadTypestartDateTime">
+    </div>
+    <div class="form-row">
+        <label for="node-input-startTimeZone">startTimeZone</label>
+        <input type="text" id="node-input-startTimeZone"></input>
+        <input type="hidden" id="node-input-payloadTypestartTimeZone">
+    </div>
+    <div class="form-row">
+        <label for="node-input-endDateTime">endDateTime</label>
+        <input type="text" id="node-input-endDateTime"></input>
+        <input type="hidden" id="node-input-payloadTypeendDateTime">
+    </div>
+    <div class="form-row">
+        <label for="node-input-endTimeZone">endTimeZone</label>
+        <input type="text" id="node-input-endTimeZone"></input>
+        <input type="hidden" id="node-input-payloadTypeendTimeZone">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="insert-event">
+    <h2>Description</h2>
+    <p>Query opens tabs based on criteria like URL, muted status</p>
+
+    <h2>Config</h2>
+    <dl class="message-properties">
+
+        <dt>payload<span class="property-type">various</span></dt>
+        <dd>The configured payload of the message.</dd>
+
+        <dt class="optional">topic <span class="property-type">string</span></dt>
+        <dd>An optional property</dd>
+
+    </dl>
+
+
+    <h2>Outputs</h2>
+    <dl class="message-properties">
+
+        <dt>payload<span class="property-type">various</span></dt>
+        <dd>The configured payload of the message.</dd>
+
+        <dt class="optional">topic <span class="property-type">string</span></dt>
+        <dd>An optional property</dd>
+
+    </dl>
+</script>

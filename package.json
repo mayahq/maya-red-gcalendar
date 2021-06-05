@@ -28,7 +28,8 @@
       "schedule-quick": "src/nodes/scheduleQuick/scheduleQuick.node.js",
       "gcalendar-auth": "src/nodes/gcalendarAuth/gcalendarAuth.node.js",
       "list-events": "src/nodes/listEvents/listEvents.node.js",
-      "delete-event": "src/nodes/deleteEvent/deleteEvent.node.js"
+      "delete-event": "src/nodes/deleteEvent/deleteEvent.node.js",
+      "insert-event": "src/nodes/insertEvent/insertEvent.node.js"
     }
   }
 }

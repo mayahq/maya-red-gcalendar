@@ -20,13 +20,13 @@
                 value: "str"
             },
             timeMin: {
-                value: "2021-05-18T09:02:14.857Z"
+                value: "2021-06-05T16:24:46.433Z"
             },
             payloadTypetimeMin: {
                 value: "str"
             },
             timeMax: {
-                value: "2021-05-25T06:29:00.000Z"
+                value: "2021-06-25T06:29:00.000Z"
             },
             payloadTypetimeMax: {
                 value: "str"
@@ -160,6 +160,34 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="list-events">
-    <p> Enter documentation here </p>
+<script type="text/html" data-help-name="list-events">
+    <h2>Description</h2>
+    <p>Lists events on your calendar</p>
+
+    <h2>Session</h2>
+    <p>
+        Select or Create a gdrive-auth config node
+    <p>
+    <h2>Inputs</h2>
+    <dl class="message-properties">
+
+        <dt>calendarId<span class="property-type">string</span></dt>
+        <dd>Calendar identifier</dd>
+        <dt class="optional">timeMin<span class="property-type">string</span></dt>
+        <dd>Lower bound (exclusive) for an event's end time to filter by</dd>
+        <dt class="optional">timeMax<span class="property-type">string</span></dt>
+        <dd>Upper bound (exclusive) for an event's start time to filter by</dd>
+
+        <dt class="optional">singleEvents <span class="property-type">bool</span></dt>
+        <dd>Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves.</dd>
+
+    </dl>
+
+    <h2>Outputs</h2>
+    <dl class="message-properties">
+
+        <dt>payload<span class="property-type">various</span></dt>
+        <dd>Contains the list of events that match the query</dd>
+
+    </dl>
 </script>

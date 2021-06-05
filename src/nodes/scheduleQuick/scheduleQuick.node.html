@@ -102,6 +102,28 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="schedule-quick">
-    <p> Enter documentation here </p>
+<script type="text/html" data-help-name="schedule-quick">
+    <h2>Description</h2>
+    <p>Creates an event on your calendar</p>
+
+    <h2>Session</h2>
+    <p>
+        Select or Create a gdrive-auth config node
+    <p>
+    <h2>Inputs</h2>
+    <dl class="message-properties">
+
+        <dt>calendarId<span class="property-type">string</span></dt>
+        <dd>Calendar identifier</dd>
+        <dt>eventText<span class="property-type">string</span></dt>
+        <dd>The text describing the event to be created.</dd>
+    </dl>
+
+    <h2>Outputs</h2>
+    <dl class="message-properties">
+
+        <dt>payload<span class="property-type">various</span></dt>
+        <dd>API response for creating event</dd>
+
+    </dl>
 </script>
