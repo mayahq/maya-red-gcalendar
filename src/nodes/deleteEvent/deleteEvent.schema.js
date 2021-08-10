@@ -4,56 +4,57 @@ const {
     fields
 } = require('@mayahq/module-sdk');
 const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
+const makeRequestWithRefresh = require('../../util/reqWithRefresh')
 
 class DeleteEvent extends Node {
     static schema = new Schema({
         name: 'delete-event',
-        label: 'delete-event',
+        label: 'Delete event',
         category: 'Maya Red Gcalendar',
         isConfig: false,
         fields: {
-            session: new fields.ConfigNode({type: GcalendarAuth}),
             eventId: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
         },
 
     })
 
+    constructor(node, RED, opts) {
+        super(node, RED, {...opts})
+    }
+
     onInit() {
         // Do something on initialization of node
     }
 
-    constructor(node, RED) {
-        super(node, RED)
-    }
-
     async onMessage(msg, vals) {
-        // Handle the message. The returned value will
-        // be sent as the message to any further nodes.
-        this.setStatus("PROGRESS", "deleting event...");
-        try{
-            var fetch = require("node-fetch"); // or fetch() is native in browsers
-            let res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/${vals.eventId}`, {
-                method: "DELETE",
-                headers: {
-                    "Authorization": `Bearer ${this.credentials.session.access_token}`,
-                }
-            });
-            if(!res.ok){
-                msg.error = res.statusText;
-                this.setStatus("ERROR", res.statusText);
-                return msg;
+        this.setStatus("PROGRESS", "Deleting event");
+        const request = {
+            method: 'DELETE',
+            url: `https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/${vals.eventId}`,
+            headers: {
+                Authorization: `Bearer ${this.tokens.vals.access_token}`
             }
-            msg.payload = res.url;
-            this.setStatus("SUCCESS", "deleted");
-            return msg;
-            
         }
-        catch(err){
-            console.log(err)
-            msg.error = err;
-            this.setStatus("ERROR", "error occurred");
-            return msg;
+
+        try {
+            await makeRequestWithRefresh(this, request)
+            msg.reqUrl = request.url
+            this.setStatus('SUCCESS', 'Deleted')
+            return msg
+        } catch (e) {
+            if (e.response) {
+                console.log('CONFIG', e.config)
+                console.log('STATUS', e.response.status)
+                console.log('DATA', e.response.data)
+            } else {
+                console.log(e)
+            }
+            
+            this.setStatus('ERROR', `Error: ${e.message}`)
+            msg.__isError = true
+            msg.__error = e
+            return msg
         }
     }
 }

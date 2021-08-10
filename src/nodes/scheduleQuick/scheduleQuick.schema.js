@@ -3,7 +3,7 @@ const {
     Schema,
     fields
 } = require('@mayahq/module-sdk');
-const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
+const makeRequestWithRefresh = require('../../util/reqWithRefresh');
 
 class ScheduleQuick extends Node {
     static schema = new Schema({
@@ -12,7 +12,6 @@ class ScheduleQuick extends Node {
         category: 'Maya Red Gcalendar',
         isConfig: false,
         fields: {
-            session: new fields.ConfigNode({type: GcalendarAuth}),
             eventText: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
         },
@@ -30,35 +29,48 @@ class ScheduleQuick extends Node {
     async onMessage(msg, vals) {
         // Handle the message. The returned value will
         // be sent as the message to any further nodes.
-        this.setStatus("PROGRESS", "scheduling...");
-        try{
-            var fetch = require("node-fetch"); // or fetch() is native in browsers
-            let res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/quickAdd`, {
-                method: "POST",
-                body:JSON.stringify({
-                    text: vals.eventText,
-                    sendUpdates: "all"
-                }),
-                headers: {
-                    "Authorization": `Bearer ${this.credentials.session.access_token}`,
-                    "Content-Type":"application/json"
-                }
-            });
-            let json = await res.json();
-            if(json.error){
-                msg.error = json.error;
-                this.setStatus("ERROR", json.error.message);
-                return msg;
+        this.setStatus("PROGRESS", "Scheduling");
+
+        const request = {
+            method: 'POST',
+            url: `https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/quickAdd`,
+            data: {
+                text: vals.eventText,
+                sendUpdates: "all"
+            },
+            headers: {
+                Authorization: `Bearer ${this.tokens.vals.access_token}`
             }
-            msg.payload = json;
-            this.setStatus("SUCCESS", "scheduled");
-            return msg;
         }
-        catch(err){
-            console.log(err)
-            msg.error = err;
-            this.setStatus("ERROR", "error occurred");
-            return msg;
+
+        try {
+            const response = await makeRequestWithRefresh(this, request)
+            const { data } = response
+            if (data.error) {
+                console.log(data.error)
+                this.setStatus('ERROR', `${data.error.message}`)
+                msg.__isError = true
+                msg.__error = data.error
+                return msg
+            }
+
+            this.setStatus('SUCCESS', 'Scheduled')
+            msg.returnedData = data
+            msg.payload = data
+            return msg
+        } catch (e) {
+            if (e.response) {
+                console.log('CONFIG', e.config)
+                console.log('STATUS', e.response.status)
+                console.log('DATA', e.response.data)
+            } else {
+                console.log(e)
+            }
+
+            this.setStatus('ERROR', `Error: ${e.message}`)
+            msg.__isError = true
+            msg.__error = e
+            return msg
         }
     }
 }

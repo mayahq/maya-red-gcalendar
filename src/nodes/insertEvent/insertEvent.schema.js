@@ -2,12 +2,13 @@ const {
     Node,
     Schema,
     fields
-} = require('@mayahq/module-sdk')
+} = require('@mayahq/module-sdk');
+const makeRequestWithRefresh = require('../../util/reqWithRefresh');
 const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
 
 class InsertEvent extends Node {
-    constructor(node, RED) {
-        super(node, RED)
+    constructor(node, RED, opts) {
+        super(node, RED, {...opts})
     }
 
     static schema = new Schema({
@@ -49,45 +50,53 @@ class InsertEvent extends Node {
     }
 
     async onMessage(msg, vals) {
-        // Handle the message. The returned value will
-        // be sent as the message to any further nodes.
-        this.setStatus("PROGRESS", "scheduling...");
-        try{
-            var fetch = require("node-fetch"); // or fetch() is native in browsers
-            let res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events`, {
-                method: "POST",
-                body:JSON.stringify({
-                    summary: vals.summary,
-                    sendUpdates: "all",
-                    start: {
-                        dateTime: vals.startDateTime,
-                        timezone: vals.startTimeZone
-                    },
-                    end: {
-                        dateTime: vals.endDateTime,
-                        timezone: vals.endTimeZone
-                    }
-                }),
-                headers: {
-                    "Authorization": `Bearer ${this.credentials.session.access_token}`,
-                    "Content-Type":"application/json"
+        this.setStatus("PROGRESS", "Scheduling");
+        const request = {
+            method: 'POST',
+            url: `https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events`,
+            data: {
+                summary: vals.summary,
+                sendUpdates: "all",
+                start: {
+                    dateTime: vals.startDateTime,
+                    timezone: vals.startTimeZone
+                },
+                end: {
+                    dateTime: vals.endDateTime,
+                    timezone: vals.endTimeZone
                 }
-            });
-            let json = await res.json();
-            if(json.error){
-                msg.error = json.error;
-                this.setStatus("ERROR", json.error.message);
-                return msg;
+            },
+            headers: {
+                Authorization: `Bearer ${this.tokens.vals.access_token}`
             }
-            msg.payload = json;
-            this.setStatus("SUCCESS", "scheduled");
-            return msg;
         }
-        catch(err){
-            console.log(err)
-            msg.error = err;
-            this.setStatus("ERROR", "error occurred");
-            return msg;
+
+        try {
+            const response = await makeRequestWithRefresh(this, request)
+            const { data } = response
+            if (data.error) {
+                console.log(data.error)
+                this.setStatus('ERROR', `${data.error.message}`)
+                msg.__isError = true
+                msg.__error = data.error
+                return msg
+            }
+            msg.returnedData = data
+            msg.payload = data
+            return msg
+        } catch (e) {
+            if (e.response) {
+                console.log('CONFIG', e.config)
+                console.log('STATUS', e.response.status)
+                console.log('DATA', e.response.data)
+            } else {
+                console.log(e)
+            }
+
+            this.setStatus('ERROR', `Error: ${e.message}`)
+            msg.__isError = true
+            msg.__error = e
+            return msg
         }
     }
 }
