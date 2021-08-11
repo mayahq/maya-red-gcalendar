@@ -3,7 +3,6 @@ const {
     Schema,
     fields
 } = require('@mayahq/module-sdk');
-const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
 const makeRequestWithRefresh = require('../../util/reqWithRefresh')
 
 class DeleteEvent extends Node {
@@ -15,8 +14,7 @@ class DeleteEvent extends Node {
         fields: {
             eventId: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
-        },
-
+        }
     })
 
     constructor(node, RED, opts) {
@@ -28,7 +26,7 @@ class DeleteEvent extends Node {
     }
 
     async onMessage(msg, vals) {
-        this.setStatus("PROGRESS", "Deleting event");
+        this.setStatus("PROGRESS", "Deleting event")
         const request = {
             method: 'DELETE',
             url: `https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events/${vals.eventId}`,

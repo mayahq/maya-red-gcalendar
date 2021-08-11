@@ -42,7 +42,6 @@ class InsertEvent extends Node {
                 allowedTypes: ['msg', 'flow', 'global']
             }),
         },
-
     })
 
     onInit() {
