@@ -23,6 +23,7 @@
     "node-schedule": "^2.0.0"
   },
   "nodepath": "src/nodes",
+  "secureStorageVals": "./src/manifest.json",
   "nodeRedModuleName": "maya-red-gcalendar",
   "node-red": {
     "nodes": {

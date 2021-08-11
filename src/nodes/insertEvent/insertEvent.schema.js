@@ -4,7 +4,6 @@ const {
     fields
 } = require('@mayahq/module-sdk');
 const makeRequestWithRefresh = require('../../util/reqWithRefresh');
-const GcalendarAuth = require("../gcalendarAuth/gcalendarAuth.schema");
 
 class InsertEvent extends Node {
     constructor(node, RED, opts) {
@@ -17,8 +16,6 @@ class InsertEvent extends Node {
         category: 'Maya Red Gcalendar',
         isConfig: false,
         fields: {
-            // Whatever custom fields the node needs.
-            session: new fields.ConfigNode({type: GcalendarAuth}),
             summary: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
             startDateTime: new fields.Typed({
@@ -80,6 +77,7 @@ class InsertEvent extends Node {
                 msg.__error = data.error
                 return msg
             }
+            this.setStatus('SUCCESS', 'Scheduled')
             msg.returnedData = data
             msg.payload = data
             return msg

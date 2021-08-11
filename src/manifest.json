@@ -1,0 +1,11 @@
+{
+    "directory": ".mayadev",
+    "encryptionKey": "c2ba8a273a2ba4a0619e6ba4e77336e3106e1f144079fcda6ed33b3822160943",
+    "runtime": "6113798c6b64d55838c944b2",
+    "values": {
+        "access_token": "ya29.a0ARrdaM-62LfsV1Jj3tzRReran6yq5rHcb6lhiZevbNGiJCipTEU7HcRp5M-f7rKvmwmAyLTB2hPq2v6CzDliHPoTKKun0G8lBkjJ_JYDRBe-ScN9FlxInUg8rcx293i28qx8tPtejS_hMqnR8EZIy6nLbI32",
+        "refresh_token": "1//0gL2yrVTyAtYfCgYIARAAGBASNwF-L9IrDA9OwpP3sqV83Xb3tx70lqeZlXlrFf_3pOqYiwVppfh6S3FCKNvaHwiVPV_rjU-txg8",
+        "lastUpdated": 1628666429358,
+        "resource": "gcalendar"
+    }
+}

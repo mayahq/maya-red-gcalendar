@@ -9,10 +9,6 @@
             isProfileConfigNode: {
                 value: false
             },
-            session: {
-                value: "",
-                type: "gcalendar-auth"
-            },
             eventId: {
                 value: ""
             },
@@ -30,9 +26,9 @@
         outputs: 1,
         icon: "fa-file-code-o.png",
         label: function() {
-            return this.name || "delete-event"
+            return this.name || "Delete event"
         },
-        paletteLabel: "delete-event",
+        paletteLabel: "Delete event",
         exportable: true,
         oneditprepare: function() {
             if (this.payloadTypeeventId === null) {
@@ -85,10 +81,6 @@
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
-    </div>
-    <div class="form-row">
-        <label for="node-input-session">session</label>
-        <input type="text" id="node-input-session"></input>
     </div>
     <div class="form-row">
         <label for="node-input-eventId">eventId</label>

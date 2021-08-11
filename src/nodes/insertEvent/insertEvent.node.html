@@ -9,10 +9,6 @@
             isProfileConfigNode: {
                 value: false
             },
-            session: {
-                value: "",
-                type: "gcalendar-auth"
-            },
             summary: {
                 value: ""
             },
@@ -26,7 +22,7 @@
                 value: "str"
             },
             startDateTime: {
-                value: "2021-06-05T16:24:46.419Z"
+                value: "2021-08-11T07:41:08.215Z"
             },
             payloadTypestartDateTime: {
                 value: "str"
@@ -38,7 +34,7 @@
                 value: "str"
             },
             endDateTime: {
-                value: "2021-06-24T00:30:00.000Z"
+                value: "2021-08-11T08:41:00.000Z"
             },
             payloadTypeendDateTime: {
                 value: "str"
@@ -183,10 +179,6 @@
         <input type="text" id="node-input-name" style="width:70%;" placeholder="Name" />
     </div>
     <div class="form-row">
-        <label for="node-input-session">session</label>
-        <input type="text" id="node-input-session"></input>
-    </div>
-    <div class="form-row">
         <label for="node-input-summary">summary</label>
         <input type="text" id="node-input-summary"></input>
         <input type="hidden" id="node-input-payloadTypesummary">
@@ -220,28 +212,34 @@
 
 <script type="text/html" data-help-name="insert-event">
     <h2>Description</h2>
-    <p>Query opens tabs based on criteria like URL, muted status</p>
+    <p>Creates an event on your calendar</p>
 
-    <h2>Config</h2>
+    <h2>Session</h2>
+    <p>
+        Select or Create a gdrive-auth config node
+    <p>
+    <h2>Inputs</h2>
     <dl class="message-properties">
 
-        <dt>payload<span class="property-type">various</span></dt>
-        <dd>The configured payload of the message.</dd>
-
-        <dt class="optional">topic <span class="property-type">string</span></dt>
-        <dd>An optional property</dd>
-
+        <dt>calendarId<span class="property-type">string</span></dt>
+        <dd>Calendar identifier</dd>
+        <dt>summary<span class="property-type">string</span></dt>
+        <dd>The text describing the event to be created.</dd>
+        <dt>startDateTime<span class="property-type">string</span></dt>
+        <dd>ISO String of start datetime</dd>
+        <dt>startTimeZone<span class="property-type">string</span></dt>
+        <dd>Timezone of the datetime</dd>
+        <dt>endDateTime<span class="property-type">string</span></dt>
+        <dd>ISO String of end datetime</dd>
+        <dt>endTimeZone<span class="property-type">string</span></dt>
+        <dd>Timezone of the datetime</dd>
     </dl>
-
 
     <h2>Outputs</h2>
     <dl class="message-properties">
 
         <dt>payload<span class="property-type">various</span></dt>
-        <dd>The configured payload of the message.</dd>
-
-        <dt class="optional">topic <span class="property-type">string</span></dt>
-        <dd>An optional property</dd>
+        <dd>API response for creating event</dd>
 
     </dl>
 </script>

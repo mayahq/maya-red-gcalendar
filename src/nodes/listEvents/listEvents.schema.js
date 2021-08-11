@@ -58,6 +58,7 @@ class ListEvents extends Node {
                 msg.__error = data.error
                 return msg
             }
+            this.setStatus('SUCCESS', 'Fetched')
             msg.returnedData = data
             msg.payload = data
             return msg
