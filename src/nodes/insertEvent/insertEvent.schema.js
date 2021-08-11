@@ -3,7 +3,10 @@ const {
     Schema,
     fields
 } = require('@mayahq/module-sdk');
+const { color, icon } = require('../../style')
+
 const makeRequestWithRefresh = require('../../util/reqWithRefresh');
+
 
 class InsertEvent extends Node {
     constructor(node, RED, opts) {
@@ -12,8 +15,8 @@ class InsertEvent extends Node {
 
     static schema = new Schema({
         name: 'insert-event',
-        label: 'insert-event',
-        category: 'Maya Red Gcalendar',
+        label: 'Insert event',
+        category: 'Google Calendar',
         isConfig: false,
         fields: {
             summary: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
@@ -39,6 +42,8 @@ class InsertEvent extends Node {
                 allowedTypes: ['msg', 'flow', 'global']
             }),
         },
+        color: color,
+        icon: icon
     })
 
     onInit() {

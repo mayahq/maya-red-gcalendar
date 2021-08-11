@@ -1,7 +1,7 @@
 <script type='text/javascript'>
     RED.nodes.registerType("delete-event", {
-        category: "Maya Red Gcalendar",
-        color: "#8BBDD9",
+        category: "Google Calendar",
+        color: "#eaeaea",
         defaults: {
             name: {
                 value: ""
@@ -24,7 +24,7 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "fa-file-code-o.png",
+        icon: "cshift.png",
         label: function() {
             return this.name || "Delete event"
         },

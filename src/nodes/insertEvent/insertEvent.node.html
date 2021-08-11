@@ -1,7 +1,7 @@
 <script type='text/javascript'>
     RED.nodes.registerType("insert-event", {
-        category: "Maya Red Gcalendar",
-        color: "#8BBDD9",
+        category: "Google Calendar",
+        color: "#eaeaea",
         defaults: {
             name: {
                 value: ""
@@ -22,7 +22,7 @@
                 value: "str"
             },
             startDateTime: {
-                value: "2021-08-11T07:41:08.215Z"
+                value: "2021-08-11T08:58:27.809Z"
             },
             payloadTypestartDateTime: {
                 value: "str"
@@ -34,7 +34,7 @@
                 value: "str"
             },
             endDateTime: {
-                value: "2021-08-11T08:41:00.000Z"
+                value: "2021-08-11T09:58:00.000Z"
             },
             payloadTypeendDateTime: {
                 value: "str"
@@ -48,11 +48,11 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "fa-file-code-o.png",
+        icon: "cshift.png",
         label: function() {
-            return this.name || "insert-event"
+            return this.name || "Insert event"
         },
-        paletteLabel: "insert-event",
+        paletteLabel: "Insert event",
         exportable: true,
         oneditprepare: function() {
             if (this.payloadTypesummary === null) {

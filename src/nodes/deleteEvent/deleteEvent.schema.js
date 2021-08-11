@@ -3,18 +3,21 @@ const {
     Schema,
     fields
 } = require('@mayahq/module-sdk');
+const { color, icon } = require('../../style')
 const makeRequestWithRefresh = require('../../util/reqWithRefresh')
 
 class DeleteEvent extends Node {
     static schema = new Schema({
         name: 'delete-event',
         label: 'Delete event',
-        category: 'Maya Red Gcalendar',
+        category: 'Google Calendar',
         isConfig: false,
         fields: {
             eventId: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
-        }
+        },
+        color: color,
+        icon: icon
     })
 
     constructor(node, RED, opts) {

@@ -1,7 +1,7 @@
 <script type='text/javascript'>
     RED.nodes.registerType("list-events", {
-        category: "Maya Red Gcalendar",
-        color: "#8BBDD9",
+        category: "Google Calendar",
+        color: "#eaeaea",
         defaults: {
             name: {
                 value: ""
@@ -16,7 +16,7 @@
                 value: "str"
             },
             timeMin: {
-                value: "2021-08-11T07:41:08.230Z"
+                value: "2021-08-11T08:58:27.820Z"
             },
             payloadTypetimeMin: {
                 value: "str"
@@ -36,11 +36,11 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "fa-file-code-o.png",
+        icon: "cshift.png",
         label: function() {
-            return this.name || "list-events"
+            return this.name || "Get events"
         },
-        paletteLabel: "list-events",
+        paletteLabel: "Get events",
         exportable: true,
         oneditprepare: function() {
             if (this.payloadTypecalendarId === null) {

@@ -3,14 +3,15 @@ const {
     Schema,
     fields
 } = require('@mayahq/module-sdk');
+const { color, icon } = require('../../style')
 
 const makeRequestWithRefresh = require('../../util/reqWithRefresh')
 
 class ListEvents extends Node {
     static schema = new Schema({
         name: 'list-events',
-        label: 'list-events',
-        category: 'Maya Red Gcalendar',
+        label: 'Get events',
+        category: 'Google Calendar',
         isConfig: false,
         fields: {
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
@@ -25,7 +26,8 @@ class ListEvents extends Node {
                 allowedTypes: ['msg', 'flow', 'global']}),
             singleEvents: new fields.Typed({type: 'bool', defaultVal: true, allowedTypes: ['msg', 'flow', 'global']}),
         },
-
+        color: color,
+        icon: icon
     })
 
     constructor(node, RED, opts) {

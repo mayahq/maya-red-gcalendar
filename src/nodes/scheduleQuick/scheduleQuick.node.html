@@ -1,7 +1,7 @@
 <script type='text/javascript'>
     RED.nodes.registerType("schedule-quick", {
-        category: "Maya Red Gcalendar",
-        color: "#8BBDD9",
+        category: "Google Calendar",
+        color: "#eaeaea",
         defaults: {
             name: {
                 value: ""
@@ -24,11 +24,11 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "fa-file-code-o.png",
+        icon: "cshift.png",
         label: function() {
-            return this.name || "schedule-quick"
+            return this.name || "Quick schedule"
         },
-        paletteLabel: "schedule-quick",
+        paletteLabel: "Quick schedule",
         exportable: true,
         oneditprepare: function() {
             if (this.payloadTypeeventText === null) {

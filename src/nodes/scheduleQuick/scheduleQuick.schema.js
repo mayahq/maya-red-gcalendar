@@ -4,18 +4,20 @@ const {
     fields
 } = require('@mayahq/module-sdk');
 const makeRequestWithRefresh = require('../../util/reqWithRefresh');
+const { color, icon } = require('../../style')
 
 class ScheduleQuick extends Node {
     static schema = new Schema({
         name: 'schedule-quick',
-        label: 'schedule-quick',
-        category: 'Maya Red Gcalendar',
+        label: 'Quick schedule',
+        category: 'Google Calendar',
         isConfig: false,
         fields: {
             eventText: new fields.Typed({type: 'str', defaultVal: '', allowedTypes: ['msg', 'flow', 'global']}),
             calendarId: new fields.Typed({type: 'str', defaultVal: 'primary', allowedTypes: ['msg', 'flow', 'global']}),
         },
-
+        color: color,
+        icon: icon
     })
 
     constructor(node, RED, opts) {
