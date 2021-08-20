@@ -41,6 +41,21 @@ class InsertEvent extends Node {
                 defaultVal: 'Asia/Kolkata', 
                 allowedTypes: ['msg', 'flow', 'global']
             }),
+            location: new fields.Typed({
+                type: 'str', 
+                defaultVal: '', 
+                allowedTypes: ['msg', 'flow', 'global']
+            }),
+            description: new fields.Typed({
+                type: 'str', 
+                defaultVal: 'Asia/Kolkata', 
+                allowedTypes: ['msg', 'flow', 'global']
+            }),
+            additionalProperties: new fields.Typed({
+                type: 'json', 
+                defaultVal: 'Asia/Kolkata', 
+                allowedTypes: ['msg', 'flow', 'global']
+            }),
         },
         color: color,
         icon: icon
@@ -52,21 +67,35 @@ class InsertEvent extends Node {
 
     async onMessage(msg, vals) {
         this.setStatus("PROGRESS", "Scheduling");
+        let reqData = {
+            summary: vals.summary,
+            sendUpdates: "all",
+            start: {
+                dateTime: vals.startDateTime,
+                timezone: vals.startTimeZone
+            },
+            end: {
+                dateTime: vals.endDateTime,
+                timezone: vals.endTimeZone
+            }
+        }
+
+        if (vals.description) {
+            reqData.description = vals.description
+        }
+
+        if (vals.location) {
+            reqData.location = vals.location
+        }
+
+        if (vals.additionalProperties) {
+            reqData = { ...reqData, ...(vals.additionalProperties)}
+        }
+
         const request = {
             method: 'POST',
             url: `https://www.googleapis.com/calendar/v3/calendars/${vals.calendarId}/events`,
-            data: {
-                summary: vals.summary,
-                sendUpdates: "all",
-                start: {
-                    dateTime: vals.startDateTime,
-                    timezone: vals.startTimeZone
-                },
-                end: {
-                    dateTime: vals.endDateTime,
-                    timezone: vals.endTimeZone
-                }
-            },
+            data: reqData,
             headers: {
                 Authorization: `Bearer ${this.tokens.vals.access_token}`
             }
