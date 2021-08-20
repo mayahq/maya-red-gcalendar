@@ -22,7 +22,7 @@
                 value: "str"
             },
             startDateTime: {
-                value: "2021-08-11T08:58:27.809Z"
+                value: "2021-08-20T12:03:10.763Z"
             },
             payloadTypestartDateTime: {
                 value: "str"
@@ -34,7 +34,7 @@
                 value: "str"
             },
             endDateTime: {
-                value: "2021-08-11T09:58:00.000Z"
+                value: "2021-08-20T13:03:00.000Z"
             },
             payloadTypeendDateTime: {
                 value: "str"
@@ -44,6 +44,24 @@
             },
             payloadTypeendTimeZone: {
                 value: "str"
+            },
+            location: {
+                value: ""
+            },
+            payloadTypelocation: {
+                value: "str"
+            },
+            description: {
+                value: "Asia/Kolkata"
+            },
+            payloadTypedescription: {
+                value: "str"
+            },
+            additionalProperties: {
+                value: "Asia/Kolkata"
+            },
+            payloadTypeadditionalProperties: {
+                value: "json"
             },
         },
         inputs: 1,
@@ -163,6 +181,60 @@
             })
             $("#node-input-endTimeZone").typedInput("type", this.payloadTypeendTimeZone)
 
+            if (this.payloadTypelocation === null) {
+                if (this.location === "") {
+                    this.payloadTypelocation = "date"
+                } else {
+                    this.payloadTypelocation = "str"
+                }
+            } else if (this.payloadTypelocation === 'string' || this.payloadTypelocation === 'none') {
+                this.payloadTypelocation = "str"
+            }
+
+            $("#node-input-payloadTypelocation").val(this.payloadTypelocation)
+            $("#node-input-location").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypelocation"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-location").typedInput("type", this.payloadTypelocation)
+
+            if (this.payloadTypedescription === null) {
+                if (this.description === "") {
+                    this.payloadTypedescription = "date"
+                } else {
+                    this.payloadTypedescription = "str"
+                }
+            } else if (this.payloadTypedescription === 'string' || this.payloadTypedescription === 'none') {
+                this.payloadTypedescription = "str"
+            }
+
+            $("#node-input-payloadTypedescription").val(this.payloadTypedescription)
+            $("#node-input-description").typedInput({
+                default: "str",
+                typeField: $("#node-input-payloadTypedescription"),
+                types: ["msg", "flow", "global", "str"]
+            })
+            $("#node-input-description").typedInput("type", this.payloadTypedescription)
+
+            if (this.payloadTypeadditionalProperties === null) {
+                if (this.additionalProperties === "") {
+                    this.payloadTypeadditionalProperties = "date"
+                } else {
+                    this.payloadTypeadditionalProperties = "json"
+                }
+            } else if (this.payloadTypeadditionalProperties === 'string' || this.payloadTypeadditionalProperties === 'none') {
+                this.payloadTypeadditionalProperties = "json"
+            }
+
+            $("#node-input-payloadTypeadditionalProperties").val(this.payloadTypeadditionalProperties)
+            $("#node-input-additionalProperties").typedInput({
+                default: "json",
+                typeField: $("#node-input-payloadTypeadditionalProperties"),
+                types: ["msg", "flow", "global", "json"]
+            })
+            $("#node-input-additionalProperties").typedInput("type", this.payloadTypeadditionalProperties)
+
         },
         oneditsave: function() {},
         oneditcancel: function() {},
@@ -207,6 +279,21 @@
         <label for="node-input-endTimeZone">endTimeZone</label>
         <input type="text" id="node-input-endTimeZone"></input>
         <input type="hidden" id="node-input-payloadTypeendTimeZone">
+    </div>
+    <div class="form-row">
+        <label for="node-input-location">location</label>
+        <input type="text" id="node-input-location"></input>
+        <input type="hidden" id="node-input-payloadTypelocation">
+    </div>
+    <div class="form-row">
+        <label for="node-input-description">description</label>
+        <input type="text" id="node-input-description"></input>
+        <input type="hidden" id="node-input-payloadTypedescription">
+    </div>
+    <div class="form-row">
+        <label for="node-input-additionalProperties">additionalProperties</label>
+        <input type="text" id="node-input-additionalProperties"></input>
+        <input type="hidden" id="node-input-payloadTypeadditionalProperties">
     </div>
 </script>
 
