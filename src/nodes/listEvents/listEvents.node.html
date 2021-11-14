@@ -16,13 +16,13 @@
                 value: "str"
             },
             timeMin: {
-                value: "2021-08-20T12:29:31.853Z"
+                value: "2021-11-14T14:02:57.194Z"
             },
             payloadTypetimeMin: {
                 value: "str"
             },
             timeMax: {
-                value: "2021-08-25T06:29:00.000Z"
+                value: "2021-11-25T06:29:00.000Z"
             },
             payloadTypetimeMax: {
                 value: "str"
@@ -153,24 +153,32 @@
 </script>
 
 <script type="text/html" data-help-name="list-events">
-    <h2>Description</h2>
-    <p>Lists events on your calendar</p>
+    <h2 data-type="description-title">Description</h2>
+    <p data-type="description-summary">Lists scheduled events on calendar of the account linked with the workspace</p>
 
-    <h2>Session</h2>
-    <p>
-        Select or Create a gdrive-auth config node
-    <p>
     <h2>Inputs</h2>
     <dl class="message-properties">
 
-        <dt>calendarId<span class="property-type">string</span></dt>
+        <dt>
+            <snap class="property-name">calendarId</snap>
+            <span class="property-type">string</span>
+        </dt>
         <dd>Calendar identifier</dd>
-        <dt class="optional">timeMin<span class="property-type">string</span></dt>
+        <dt class="optional">
+            <snap class="property-name">timeMin</snap>
+            <span class="property-type">string</span>
+        </dt>
         <dd>Lower bound (exclusive) for an event's end time to filter by</dd>
-        <dt class="optional">timeMax<span class="property-type">string</span></dt>
+        <dt class="optional">
+            <snap class="property-name">timeMax</snap>
+            <span class="property-type">string</span>
+        </dt>
         <dd>Upper bound (exclusive) for an event's start time to filter by</dd>
 
-        <dt class="optional">singleEvents <span class="property-type">bool</span></dt>
+        <dt class="optional">
+            <snap class="property-name">singleEvents</snap>
+            <span class="property-type">bool</span>
+        </dt>
         <dd>Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves.</dd>
 
     </dl>
