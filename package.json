@@ -31,5 +31,25 @@
       "delete-event": "src/nodes/deleteEvent/deleteEvent.node.js",
       "insert-event": "src/nodes/insertEvent/insertEvent.node.js"
     }
+  },
+  "mayaDetails": {
+    "name": "Google Calendar Module",
+    "version": "1.0.4",
+    "description": "Maya module to access all frequently needed functions of Google Calendar",
+    "author": "dush-t",
+    "type": "git",
+    "needsUserProfile": true,
+    "configType": {
+      "name": "Google Calendar Authentication",
+      "oid": "61973fea53546c43979f67dd"
+    },
+    "thumbnail": "",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/mayahq/maya-red-gcalendar.git"
+    },
+    "origin": {
+      "moduleId": "618e6a409caba6e380643309"
+    }
   }
 }
